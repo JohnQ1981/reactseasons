@@ -1,25 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+// const App = ()=>{
+//     window.navigator.geolocation.getCurrentPosition(
+//         (position)=> console.log(position),
+//         (err)=> console.log(err)
+//     );
+//     return (
+
+//         <div>Latitude:
+//         <SeasonDisplay />
+        
+//         </div>
+//     );
+// };
+
+class App extends React.Component {
+constructor (props){
+    super(props);
+    this.state ={lat:null, errorMessage: ''};
+
+    window.navigator.geolocation.getCurrentPosition(
+        (position)=> 
+        
+        {
+           this.setState({lat: position.coords.latitude}); 
+        },
+        (err)=> {this.setState({errorMessage : err.message});
+    } 
+    )
+};
+
+
+    render(){
+                
+       if (this.state.errorMessage && !this.state.lat) {
+        return <div>Error: {this.state.errorMessage}</div>
+       } else if (this.state.lat && !this.errorMessage) {
+        return <div>Latitude: {this.state.lat}</div>
+       } else
+       return <div>Waiting for user permission!</div>
+    }
 }
 
 export default App;
