@@ -33,12 +33,16 @@ constructor (props){
 
     render(){
                 
-       if (this.state.errorMessage && !this.state.lat) {
+       if ((this.state.errorMessage && !this.state.lat)) {
         return <div>Error: {this.state.errorMessage}</div>
-       } else if (this.state.lat && !this.errorMessage) {
-        return <div>Latitude: {this.state.lat}</div>
-       } else
-       return <div>Waiting for user permission!</div>
+       } else if ((this.state.lat && !this.errorMessage)&&(this.state.lat > 38)) {
+        return <div>Latitude: {this.state.lat} and it is in Northern Hemisphere</div>
+       } 
+       else if ((this.state.lat && !this.errorMessage)&&(this.state.lat < 35)) {
+        return <div>Latitude: {this.state.lat} and it is in Southern Hemisphere</div>
+       }
+       else {
+       return <div>Waiting for user permission!</div>}
     }
 }
 
