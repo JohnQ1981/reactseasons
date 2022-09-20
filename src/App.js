@@ -1,4 +1,5 @@
 import React from 'react';
+import SeasonDisplay from './components/SeasonDisplay';
 
 // const App = ()=>{
 //     window.navigator.geolocation.getCurrentPosition(
@@ -15,31 +16,51 @@ import React from 'react';
 // };
 
 class App extends React.Component {
-constructor (props){
-    super(props);
-    this.state ={lat:null, errorMessage: ''};
+// constructor (props){
+//     super(props);
+//     this.state ={lat:null, errorMessage: ''};
 
-    window.navigator.geolocation.getCurrentPosition(
-        (position)=> 
+//     window.navigator.geolocation.getCurrentPosition(
+//         (position)=> 
         
-        {
-           this.setState({lat: position.coords.latitude}); 
-        },
-        (err)=> {this.setState({errorMessage : err.message});
-    } 
-    )
-};
+//         {
+//            this.setState({lat: position.coords.latitude}); 
+//         },
+//         (err)=> {this.setState({errorMessage : err.message});
+//     } 
+//     )
+// };
 
+state = { lat: null, errorMessage: "" };
+
+  componentDidMount() {
+    window.navigator.geolocation.getCurrentPosition(
+      (position) => this.setState({ lat: position.coords.latitude }),
+      (err) => this.setState({ errorMessage: err.message })
+    );
+  }
 
     render(){
                 
        if ((this.state.errorMessage && !this.state.lat)) {
         return <div>Error: {this.state.errorMessage}</div>
-       } else if ((this.state.lat && !this.errorMessage)&&(this.state.lat > 38)) {
-        return <div>Latitude: {this.state.lat} and it is in Northern Hemisphere</div>
+       } else if ((this.state.lat && !this.errorMessage)&&(this.state.lat > 0)) {
+        return <div>Latitude: {this.state.lat} and it is in Northern Hemisphere
+            <div><SeasonDisplay
+                    lat ={this.state.lat}
+
+                    />
+            </div>
+        </div>
        } 
-       else if ((this.state.lat && !this.errorMessage)&&(this.state.lat < 35)) {
-        return <div>Latitude: {this.state.lat} and it is in Southern Hemisphere</div>
+       else if ((this.state.lat && !this.errorMessage)&&(this.state.lat < 0)) {
+        return <div>Latitude: {this.state.lat} and it is in Southern Hemisphere
+        <div><SeasonDisplay
+                    lat ={this.state.lat}
+
+                    />
+            </div>
+        </div>
        }
        else {
        return <div>Waiting for user permission!</div>}
