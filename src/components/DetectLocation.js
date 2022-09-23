@@ -1,5 +1,5 @@
 import React from "react";
-
+import Loader from "./Loader";
 if (module.hot) {
   module.hot.accept();
 }
@@ -30,7 +30,7 @@ class DetectLocation extends React.Component {
       return <div>Latitude: {this.state.lat}</div>;
     }
 
-    return <div>Loading!</div>;
+    return <div><Loader /></div>;
   }
 }
 

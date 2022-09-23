@@ -1,6 +1,6 @@
 import React from 'react';
 import SeasonDisplay from './components/SeasonDisplay';
-
+import Loader from './components/Loader';
 // const App = ()=>{
 //     window.navigator.geolocation.getCurrentPosition(
 //         (position)=> console.log(position),
@@ -63,7 +63,7 @@ state = { lat: null, errorMessage: "" };
         </div>
        }
        else {
-       return <div>Waiting for user permission!</div>}
+       return <div><Loader /></div>}
     }
 }
 
