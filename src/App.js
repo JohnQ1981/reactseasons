@@ -63,7 +63,8 @@ state = { lat: null, errorMessage: "" };
         </div>
        }
        else {
-       return <div><Loader /></div>}
+       return <div><Loader
+       message='Please allow app to access to your location' /></div>}
     }
 }
 

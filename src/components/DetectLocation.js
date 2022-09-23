@@ -30,7 +30,8 @@ class DetectLocation extends React.Component {
       return <div>Latitude: {this.state.lat}</div>;
     }
 
-    return <div><Loader /></div>;
+    return <div><Loader
+    message='Please allow app to access to your location' /></div>;
   }
 }
 
